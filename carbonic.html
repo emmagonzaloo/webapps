@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbonic - Vinos y Smash Burgers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables de colores */
+        :root {
+            --color-primary: #8B4513; /* Marrón cálido como el vino tinto */
+            --color-secondary: #D4A76A; /* Dorado suave como el pan tostado */
+            --color-accent: #722F37; /* Borgoña para acentos */
+            --color-light: #F8F4E9; /* Beige claro para fondos */
+            --color-dark: #2C1810; /* Marrón oscuro para texto */
+            --color-muted: #A9927D; /* Marrón más suave para texto secundario */
+            --shadow: 0 4px 12px rgba(44, 24, 16, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background-color: var(--color-light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--color-accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-secondary);
+            margin: 15px auto;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Header y navegación */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 30px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-primary);
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://placeholder-image-service.onrender.com/image/1200x800?prompt=Elegant%20restaurant%20interior%20with%20wooden%20tables%20wine%20bottles%20and%20gourmet%20burgers%20in%20Calella%20de%20Mar&id=9e19645a-8d34-414f-a978-a375c7308a59') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        /* About section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Menu section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .menu-info {
+            padding: 20px;
+        }
+        
+        .menu-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .menu-desc {
+            color: var(--color-muted);
+            margin-bottom: 15px;
+        }
+        
+        .menu-price {
+            font-weight: 700;
+            color: var(--color-primary);
+            font-size: 1.2rem;
+        }
+        
+        /* Gallery section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Reservations section */
+        .reservations {
+            background-color: var(--color-dark);
+            color: white;
+        }
+        
+        .reservations .section-title:after {
+            background-color: var(--color-secondary);
+        }
+        
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Contact section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--color-secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 10px;
+        }
+        
+        .footer-link a:hover {
+            color: var(--color-secondary);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 20px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .reservation-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Carbonic</a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                <li class="nav-item"><a href="#carta" class="nav-link">Carta</a></li>
+                <li class="nav-item"><a href="#galeria" class="nav-link">Galería</a></li>
+                <li class="nav-item"><a href="#reservas" class="nav-link">Reservas</a></li>
+                <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+            
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Vinos selectos y smash burgers con alma</h1>
+            <p class="hero-subtitle">Disfruta de la mejor experiencia gastronómica en Calella de Mar</p>
+            <div class="hero-buttons">
+                <a href="#reservas" class="btn">Reservar mesa</a>
+                <a href="#carta" class="btn btn-outline">Ver carta</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="section">
+        <div class="container">
+            <h2 class="section-title">Sobre Nosotros</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>En Carbonic hemos creado un espacio donde se fusionan dos pasiones: los vinos de calidad y las smash burgers artesanales. Nuestro local en el corazón de Calella de Mar se ha convertido en un referente gastronómico gracias a nuestra dedicación por los productos locales y las técnicas culinarias cuidadosas.</p>
+                    <p>Cada hamburguesa es preparada al momento con carne de primera calidad, pan artesano y ingredientes frescos. Nuestra carta de vinos ha sido seleccionada minuciosamente para ofrecerte el maridaje perfecto, con especial atención a denominaciones de origen locales y internacionales.</p>
+                    <p>Ven a disfrutar de un ambiente acogedor donde la buena comida, el buen vino y las mejores compañías se encuentran.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://placeholder-image-service.onrender.com/image/500x400?prompt=Cozy%20restaurant%20interior%20with%20wooden%20tables%20wine%20display%20and%20warm%20lighting&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Acogedor interior del restaurante Carbonic con decoración moderna y ambiente cálido">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="carta" class="section" style="background-color: #f9f9f9;">
+        <div class="container">
+            <h2 class="section-title">Nuestra Carta</h2>
+            
+            <h3 class="text-center" style="margin-bottom: 30px;">Smash Burgers</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Gourmet%20smash%20burger%20with%20melty%20cheese%20crispy%20edges%20and%20fresh%20ingredients&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Smash burger clásica con queso fundido, lechuga y salsa especial">
+                    </div>
+                    <div class="menu-info">
+                        <h4 class="menu-title">Clásica Carbon</h4>
+                        <p class="menu-desc">Carne 100% vacuno, queso cheddar, lechuga, tomate, cebolla caramelizada y nuestra salsa especial.</p>
+                        <p class="menu-price">10,90 €</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Gourmet%20burger%20with%20blue%20cheese%20caramelized%20onions%20and%20arugula&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Hamburguesa con queso azul, cebolla caramelizada y rúcula">
+                    </div>
+                    <div class="menu-info">
+                        <h4 class="menu-title">Blue Cheese</h4>
+                        <p class="menu-desc">Carne premium, queso azul, cebolla caramelizada, rúcula y reducción de oporto.</p>
+                        <p class="menu-price">12,50 €</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Spicy%20burger%20with%20jalapenos%20pepper%20jack%20cheese%20and%20chipotle%20sauce&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Hamburguesa picante con jalapeños, queso pepper jack y salsa chipotle">
+                    </div>
+                    <div class="menu-info">
+                        <h4 class="menu-title">Picante Special</h4>
+                        <p class="menu-desc">Doble carne, queso pepper jack, jalapeños, bacon crujiente y salsa chipotle.</p>
+                        <p class="menu-price">13,90 €</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-center" style="margin: 50px 0 30px;">Vinos Seleccionados</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Elegant%20glass%20of%20red%20wine%20with%20bottle%20on%20wooden%20table&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Copa de vino tinto con botella sobre mesa de madera">
+                    </div>
+                    <div class="menu-info">
+                        <h4 class="menu-title">Tinto Reserva</h4>
+                        <p class="menu-desc">Selección de tintos con crianza, cuerpo robusto y notas especiadas. Perfecto para carnes.</p>
+                        <p class="menu-price">Desde 18 €</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Glass%20of%20white%20wine%20with%20fresh%20seafood%20and%20lemon%20slices&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Copa de vino blanco con mariscos y limón">
+                    </div>
+                    <div class="menu-info">
+                        <h4 class="menu-title">Blanco Aromatico</h4>
+                        <p class="menu-desc">Vinos blancos afrutados y frescos, ideales para aperitivo o pescados.</p>
+                        <p class="menu-price">Desde 15 €</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Sparkling%20rose%20wine%20in%20elegant%20flute%20glass%20with%20strawberries&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Copas de vino rosado espumoso con fresas">
+                    </div>
+                    <div class="menu-info">
+                        <h4 class="menu-title">Rosado Espumoso</h4>
+                        <p class="menu-desc">Burbujas finas y elegantes, perfectas para celebrar o como aperitivo.</p>
+                        <p class="menu-price">Desde 22 €</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="section">
+        <div class="container">
+            <h2 class="section-title">Galería</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Artistically%20plated%20gourmet%20burger%20with%20side%20of%20truffle%20fries&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Hamburguesa gourmet presentada artísticamente con acompañamiento">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Wine%20cellar%20with%20wooden%20shelves%20and%20ambient%20lighting&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Bodega de vinos con estanterías de madera y iluminación ambiental">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Chef%20preparing%20burgers%20on%20grill%20in%20modern%20kitchen&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Chef preparando hamburguesas a la plancha en cocina moderna">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Group%20of%20friends%20toasting%20with%20wine%20glasses%20at%20restaurant%20table&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Grupo de amigos brindando con copas de vino en el restaurante">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Close-up%20of%20burger%20with%20melting%20cheese%20and%20crispy%20bacon&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Primer plano de hamburguesa con queso fundido y bacon crujiente">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Restaurant%20terrace%20with%20sea%20views%20in%20Calella%20de%20Mar&id=9e19645a-8d34-414f-a978-a375c7308a59" alt="Terraza del restaurante con vistas al mar en Calella de Mar">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations Section -->
+    <section id="reservas" class="section reservations">
+        <div class="container">
+            <h2 class="section-title">Reserva tu Mesa</h2>
+            <form class="reservation-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">Nombre completo</label>
+                    <input type="text" id="name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Teléfono</label>
+                    <input type="tel" id="phone" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="date" class="form-label">Fecha</label>
+                    <input type="date" id="date" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="time" class="form-label">Hora</label>
+                    <input type="time" id="time" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests" class="form-label">Número de comensales</label>
+                    <input type="number" id="guests" class="form-input" min="1" max="20" required>
+                </div>
+                <div class="form-group full">
+                    <label for="message" class="form-label">Comentarios adicionales</label>
+                    <textarea id="message" class="form-textarea"></textarea>
+                </div>
+                <div class="form-group full text-center">
+                    <button type="submit" class="btn">Reservar ahora</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Dirección</h3>
+                    <p>Calle Anselm Clavé, 146<br>08370 Calella de Mar, Barcelona</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Horario</h3>
+                    <p>Lunes a Jueves: 13:00 - 23:00<br>
+                       Viernes y Sábado: 13:00 - 00:00<br>
+                       Domingo: 13:00 - 22:00</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Teléfono</h3>
+                    <p>+34 93 765 43 21</p>
+                    <p>Reservas: +34 600 123 456</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" class="footer-logo">Carbonic</a>
+                    <p>Vinos selectos y smash burgers artesanales en el corazón de Calella de Mar.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Enlaces rápidos</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#inicio">Inicio</a></li>
+                        <li class="footer-link"><a href="#nosotros">Nosotros</a></li>
+                        <li class="footer-link"><a href="#carta">Carta</a></li>
+                        <li class="footer-link"><a href="#galeria">Galería</a></li>
+                        <li class="footer-link"><a href="#reservas">Reservas</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Calle Anselm Clavé, 146<br>08370 Calella de Mar</p>
+                    <p><i class="fas fa-phone"></i> +34 93 765 43 21</p>
+                    <p><i class="fas fa-envelope"></i> hola@carbonic.cat</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Carbonic. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        }));
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
